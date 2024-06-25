@@ -1287,3 +1287,38 @@ ninja-keys::part(ninja-input-wrapper) {
     border-bottom-color: var(--global-divider-color);
   }
 }
+
+
+// Custom CSS Add by RIYASAT
+// Custom styles for light theme
+body.light-theme .news,
+body.light-theme .news-title,
+body.light-theme .news th,
+body.light-theme .news td,
+body.light-theme .news p {
+  color: #333; // Your desired text color
+}
+
+.news,
+.news-title,
+.news th,
+.news td,
+.news p {
+  color: #333; // Your desired text color
+}
+// Custom styles for light theme
+// body.light-theme .news,
+// body.light-theme .news-title,
+// body.light-theme .news th,
+// body.light-theme .news td,
+// body.light-theme .news p {
+//   color: #ff0000; // Red text color
+// }
+
+// .news,
+// .news-title,
+// .news th,
+// .news td,
+// .news p {
+//   color: #ff0000; // Red text color
+// }

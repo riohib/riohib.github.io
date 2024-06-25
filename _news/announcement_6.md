@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Preliminary work accepted in ICLR 2023 Sparse Neural Networks workshop on communication efficient federated learning. Details coming soon!!
+Preliminary work accepted in ICLR 2023 Sparse Neural Networks workshop on communication efficient federated learning and full work out on [arXiv](https://arxiv.org/abs/2405.09037).
