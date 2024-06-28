@@ -22,4 +22,4 @@ I am a Graduate Student in the Department of Electrical and Computer Engineering
 
 My interests span most of deep learning, with a current focus on efficient AI, sparse deep learning, and multimodal learning. I also have happened to dabble in research on multi-task reinforcement learning.
 
-Please reach out if you would like to know more about my research or would like to collaborate.
+Please reach out if you would like to know more about my research, discuss about AI research or would like to collaborate.
