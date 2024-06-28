@@ -20,4 +20,6 @@ social: true # includes social icons at the bottom of the page
 
 I am a Graduate Student in the Department of Electrical and Computer Engineering at the Georgia Institute of Technology. While I have a broad interest in learning algorithms, my current research primarily centers on the development of sparse and efficient neural networks and understanding the intricacies of their training process. I currently work as a Graduate Research Assistant at the Center for Translational Research in Neuro-imaging and Data Science ([TReNDS](https://trendscenter.org/)), a joint research center by Georgia Tech, Georgia State and Emory University under the supervision of [Dr. Vince Calhoun](https://scholar.google.com/citations?user=WNOoGKIAAAAJ&hl=en) and [Dr. Sergey Plis](https://scholar.google.com/citations?user=nm3liowAAAAJ&hl=en).
 
-My interests span most of deep learning, with a current focus on efficient AI, sparse deep learning, and multimodal learning. Additionally, I am actively researching federated learning and multi-task reinforcement learning.
+My interests span most of deep learning, with a current focus on efficient AI, sparse deep learning, and multimodal learning. I also have happened to dabble in research on multi-task reinforcement learning.
+
+Please reach out if you would like to know more about my research or would like to collaborate.
