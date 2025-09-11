@@ -3,21 +3,52 @@ layout: default
 ---
 
 <style>
-  /* Updated style block for a more polished hover effect */
-  .image-item {
-    /* Add padding to prevent content from touching the edges on hover */
-    padding: 10px;
-    border-radius: 8px; /* Start with slightly rounded corners */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smoother 'ease' transition */
+  /* --- Main Affiliations Styles (for Desktop) --- */
+  .affiliations-grid {
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    align-items: center;    /* Align items vertically */
+    flex-wrap: wrap;        /* Allow items to wrap to the next line */
+    gap: 20px;              /* Adds space between items */
   }
 
-  .image-item:hover {
-    /* This now scales AND moves the box up by 5 pixels */
-    transform: scale(1.05) translateY(-5px);
+  .affiliation-item {
+    flex: 1 1 150px; /* Items will grow/shrink but won't get smaller than 150px before wrapping */
+    max-width: 180px; /* Prevents items from getting too wide on large screens */
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    /* A softer, more spread-out shadow for a polished "lifted" look */
+  .affiliation-item:hover {
+    transform: scale(1.05) translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.12);
   }
+
+  /* --- Mobile Responsive Styles --- */
+  /* This block only applies to screens 768px wide or smaller */
+  @media (max-width: 768px) {
+    .affiliations-grid {
+      flex-direction: column; /* Stack the items vertically */
+      align-items: center;    /* Center the stacked items */
+    }
+
+    .affiliation-item {
+      flex-basis: 80%;      /* Each item takes up 80% of the available width */
+      max-width: 250px;     /* Ensure they don't get too wide on tablets */
+    }
+  }
+
+
+  .logo-container {
+    height: 50px; /* This is the key: creates a standard height box for all logos */
+    display: flex;
+    align-items: center; /* This vertically centers the <img> inside the box */
+    justify-content: center; /* This horizontally centers the <img> */
+    margin-bottom: 15px; /* Adds some space between the logo and the text below */
+  }
+
 </style>
 
 <div class="post">
@@ -62,71 +93,84 @@ layout: default
     <!-- Image Grid (ADDED by ME) -->
 
     <!-- ADD THIS LINE for the title -->
-    <hr class="section-line" style="margin-bottom: 0.5rem;">
-    <p style="margin-top: 0rem; font-weight: 400;">
-      Research and Work Experience
-    <p>
-    <hr class="section-line" style="margin-top: -0.5rem; opacity: 0.7;">
+    <hr class="section-line" style="margin-bottom: 1rem; opacity: 0.7;">
+    <h5 style="margin-top: 0rem; font-weight: 400;">Research and Work Experience</h5>
+    <hr class="section-line" style="margin-top: 1rem; opacity: 0.7;">
     
+    <!-- SCALING CONTAINER -->
+    <div class="affiliations-scale-container">
+      <!-- This is the main grid container -->
+      <div class="affiliations-grid">
 
-    <!-- SCALING CONTAINER - Change the scale value here to resize entire section -->
-    <div class="affiliations-scale-container" style="transform: scale(0.95); transform-origin: center;">
-      <div class="image-grid" style="display: flex; flex-wrap: nowrap; justify-content: space-around;">
-
-        <!-- New Image Item -->
-        <div class="image-item" style="flex: 1 1 20%; text-align: center; margin: 10px;">
+        <!-- Google DeepMind Item -->
+        <div class="affiliation-item">
           <a href="https://deepmind.google/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-            <img src="{{ 'assets/img/deepmind.svg' | trends }}" alt="New Image" style="margin-top: -2px; transform: scale(0.90); width: 100%;">
-            <div class="image-description" style="text-align: center; line-height: 0.3; margin-top: 18px; font-size: 14px;">
+            <div class="logo-container">
+              <!-- Added translateY(5px) to move the logo down -->
+              <img src="{{ 'assets/img/deepmind.svg' | trends }}" alt="Google DeepMind" style="transform: scale(0.90) translateY(5px); max-height: 100%; max-width: 100%;">
+            </div>
+            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
               <p>Google DeepMind</p>
               <p>Fall 2025</p>
             </div>
           </a>
         </div>
-        
-      <!-- New Image Item -->
-      <div class="image-item" style="flex: 1 1 20%; text-align: center; margin: 10px;">
-        <a href="https://cohere.com/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-          <img src="{{ 'assets/img/cohere.png' | cohere }}" alt="Cohere" style="margin-top: -13px; transform: scale(1); width: 100%;">
-          <div class="image-description" style="text-align: center; line-height: 0.3; margin-top: 9px; font-size: 14px;">
-            <p>Cohere</p>
-            <p>Fall 2024</p>
-          </div>
-        </a>
-      </div>
 
-      <!-- New Image Item -->
-      <div class="image-item" style="flex: 1 1 20%; text-align: center; margin: 10px;">
-        <a href="https://www.dolby.com/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-          <img src="{{ 'assets/img/dolby.png' | dolby }}" alt="Dolby Labs" style="margin-top: -14px; transform: scale(0.80); width: 100%;">
-          <div class="image-description" style="text-align: center; line-height: 0.3; margin-top: 0px; font-size: 14px;">
-            <p>Dolby Labs</p>
-            <p>Summer 2024</p>
-          </div>
-        </a>
-      </div>
+        <!-- Cohere Item -->
+        <div class="affiliation-item">
+          <a href="https://cohere.com/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+            <div class="logo-container">
+              <!-- Added translateY(5px) to move the logo down -->
+              <img src="{{ 'assets/img/cohere.png' | cohere }}" alt="Cohere" style="transform: scale(1) translateY(5px); max-height: 100%; max-width: 100%;">
+            </div>
+            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
+              <p>Cohere</p>
+              <p>Fall 2024</p>
+            </div>
+          </a>
+        </div>
 
-      <!-- New Image Item -->
-      <div class="image-item" style="flex: 1 1 20%; text-align: center; margin: 10px;">
-        <a href="https://ai.meta.com/research/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-          <img src="{{ 'assets/img/meta_ai.png' | meta_ai }}" alt="FAIR at Meta AI" style="margin-top: -10px; transform: scale(0.9); width: 100%;">
-          <div class="image-description" style="text-align: center; line-height: 0.3; margin-top: 12px; font-size: 14px;">
-            <p>FAIR at Meta AI</p>
-            <p>Summer 2022</p>
-          </div>
-        </a>
-      </div>
+        <!-- Dolby Labs Item -->
+        <div class="affiliation-item">
+          <a href="https://www.dolby.com/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+            <div class="logo-container">
+              <!-- Added translateY(5px) to move the logo down -->
+              <img src="{{ 'assets/img/dolby.png' | dolby }}" alt="Dolby Labs" style="transform: scale(0.98) translateY(8px); max-height: 100%; max-width: 100%;">
+            </div>
+            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
+              <p>Dolby Labs</p>
+              <p>Summer 2024</p>
+            </div>
+          </a>
+        </div>
 
-      <!-- New Image Item -->
-      <div class="image-item" style="flex: 1 1 20%; text-align: center; margin: 10px;">
-        <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-          <img src="{{ 'assets/img/gt.png' | gatech }}" alt="Georgia Tech" style="margin-top: -20px; transform: scale(0.70); width: 100%;">
-          <div class="image-description" style="text-align: center; line-height: 0.3; margin-top: 0px; font-size: 14px;">
-            <p>Georgia Tech</p>
-            <p>Aug 2019 - Present</p>
-          </div>
-        </a>
-      </div>
+        <!-- Meta AI Item -->
+        <div class="affiliation-item">
+          <a href="https://ai.meta.com/research/fair/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+            <div class="logo-container">
+              <!-- Added translateY(5px) to move the logo down -->
+              <img src="{{ 'assets/img/meta_ai.png' | meta_ai }}" alt="FAIR at Meta AI" style="transform: scale(0.9) translateY(5px); max-height: 100%; max-width: 100%;">
+            </div>
+            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
+              <p>FAIR at Meta AI</p>
+              <p>Summer 2022</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Georgia Tech Item -->
+        <div class="affiliation-item">
+          <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
+            <div class="logo-container">
+              <!-- Added translateY(5px) to move the logo down -->
+              <img src="{{ 'assets/img/gt.png' | gatech }}" alt="Georgia Tech" style="transform: scale(1.0) translateY(5px); max-height: 100%; max-width: 100%;">
+            </div>
+            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
+              <p>Georgia Tech</p>
+              <p>Aug 2019 - Present</p>
+            </div>
+          </a>
+        </div>
 
       </div>
     </div>
