@@ -6,6 +6,29 @@
 
 
 @article{arnob2024efficient,
+  abbr={COLM},
+  title={Exploring Sparse Adapters for Scalable Merging of Parameter Efficient Experts},
+  author={Samin Yeasar Arnob and Riyasat Ohib and Sergey M. Plis and Amy Zhang and Alessandro Sordoni and Doina Precup},
+  abstract={Model merging aims to integrate knowledge from multiple finetuned experts into a single, unified multi-task model. 
+    To Merging parameter-efficient task experts has recently gained growing attention as a way to build modular architectures that 
+    can be rapidly adapted on the fly for specific downstream tasks, without requiring additional fine-tuning. 
+    Typically, LoRA serves as the foundational building block of such parameter-efficient modular architectures, 
+    leveraging low-rank weight structures to reduce the number of trainable parameters. In this paper, we study the properties of 
+    sparse adapters, which train only a subset of weights in the base neural network, as potential building blocks of modular 
+    architectures. First, we propose a simple method for training highly effective sparse adapters, which is conceptually simpler 
+    than existing methods in the literature and surprisingly outperforms both LoRA and full fine-tuning in our setting. Next, we
+    investigate the merging properties of these sparse adapters by merging adapters for up to 20 natural language processing tasks, 
+    thus scaling beyond what is usually studied in the literature. Our findings demonstrate that sparse adapters yield superior 
+    in-distribution performance post-merging compared to LoRA or full model merging. Achieving strong held-out performance remains 
+    a challenge for all methods considered.
+    },
+  journal={COLM},
+  year={2025},
+  selected={true},
+  html={https://openreview.net/forum?id=te7UC87Zbw},
+}
+
+@article{arnob2024efficient,
   abbr={NeurIPS},
   title={Efficient Reinforcement Learning by Discovering Neural Pathways},
   author={Samin Yeasar Arnob and Riyasat Ohib and Sergey M. Plis and Amy Zhang and Alessandro Sordoni and Doina Precup},

@@ -7,8 +7,12 @@
   --global-code-bg-color: #{$code-bg-color-light};
   --global-text-color: #{$black-color};
   --global-text-color-light: #{$grey-color};
-  --global-theme-color: #{$purple-color};
-  --global-hover-color: #{$purple-color};
+  // --global-theme-color: #{$purple-color};
+  // --global-hover-color: #{$purple-color};
+  // --global-theme-color: #4a76d3; // <--- CHANGED
+  // --global-hover-color: #4a76d3; // <--- CHANGED
+  --global-theme-color: #3D5A80; // <--- UPDATED to a deeper, softer blue
+  --global-hover-color: #3D5A80; // <--- UPDATED
   --global-hover-text-color: #{$white-color};
   --global-footer-bg-color: #{$grey-color-dark};
   --global-footer-text-color: #{$grey-color-light};
