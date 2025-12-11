@@ -240,11 +240,28 @@ layout: default
       font-size: 0.75rem;
     }
 
-    .experience-summary {
-      font-size: 0.85rem;
+    .experience-summary-container {
       grid-row: 2;
       grid-column: 1 / -1;
       margin-top: 0.25rem;
+    }
+
+    /* Direct summary elements (experience section) - target summaries that are grid items */
+    .experience-item .experience-summary {
+      grid-row: 2;
+      grid-column: 1 / -1;
+      margin-top: 0.25rem;
+    }
+
+    /* Override for summaries inside container (education section) */
+    .experience-summary-container .experience-summary {
+      grid-row: auto;
+      grid-column: auto;
+      margin-top: 0;
+    }
+
+    .experience-summary {
+      font-size: 0.85rem;
     }
   }
 
