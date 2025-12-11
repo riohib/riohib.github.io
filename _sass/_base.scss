@@ -14,9 +14,15 @@ h6,
 em,
 div,
 li,
-span,
-strong {
+span {
   color: var(--global-text-color);
+}
+
+strong,
+b,
+.font-weight-bold {
+  color: var(--global-bold-text-color);
+  font-weight: var(--global-bold-font-weight);
 }
 
 hr {
@@ -30,7 +36,8 @@ table {
   }
 
   th {
-    font-weight: bold;
+    font-weight: var(--global-bold-font-weight, bold);
+    color: var(--global-bold-text-color, var(--global-text-color));
   }
 }
 

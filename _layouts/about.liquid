@@ -3,52 +3,256 @@ layout: default
 ---
 
 <style>
-  /* --- Main Affiliations Styles (for Desktop) --- */
-  .affiliations-grid {
+  /* --- CONTROL PARAMETERS --- */
+  /* Adjust these values to scale logos and boxes */
+  :root {
+    --logo-container-width: 95px;   /* Width of logo container (adjust to make logo column wider/narrower) */
+    --logo-container-height: 40px;  /* Height of logo container (adjust to make rows taller/shorter) */
+    --time-column-width: 120px;     /* Width of time column (adjust gap to experience detail) */
+    --logo-image-zoom: 0.75;         /* Global zoom factor for all logos (>1.0 crops whitespace, <1.0 adds space) */
+    --box-scale: 0.0;               /* Scale factor for padding/box size (1.0 = default, 1.2 = 20% larger padding) */
+    --section-header-spacing: 1.0rem; /* Space below section headers (reduce to bring content closer) */
+    --entry-border-opacity: 0.05;    /* Opacity of border between entries (0.0 = invisible, 1.0 = solid) */
+    --entry-padding: 0.4rem;         /* Vertical padding between each entry (increase for more space) */
+    
+    /* Individual logo scale adjustments (multiplied with global zoom) */
+    --logo-scale-deepmind: 1.3;     /* Google DeepMind logo scale */
+    --logo-scale-cohere: 1.1;       /* Cohere logo scale */
+    --logo-scale-dolby: 0.90;        /* Dolby Labs logo scale */
+    --logo-scale-meta: 1.3;         /* Meta AI logo scale */
+    --logo-scale-gatech: 1.0;       /* Georgia Tech logo scale */
+    --logo-scale-trends: 1.3;       /* TReNDS center logo scale */
+    
+    /* Individual logo position adjustments (negative=left/up, positive=right/down) */
+    --logo-pos-deepmind-x: 1px;     /* DeepMind horizontal offset */
+    --logo-pos-deepmind-y: -5px;     /* DeepMind vertical offset */
+    --logo-pos-cohere-x: -3px;       /* Cohere horizontal offset */
+    --logo-pos-cohere-y: -3px;       /* Cohere vertical offset */
+    --logo-pos-dolby-x: -10px;        /* Dolby horizontal offset */
+    --logo-pos-dolby-y: 0px;        /* Dolby vertical offset */
+    --logo-pos-meta-x: -2px;         /* Meta AI horizontal offset */
+    --logo-pos-meta-y: -4px;         /* Meta AI vertical offset */
+    --logo-pos-gatech-x: 0px;       /* Georgia Tech horizontal offset */
+    --logo-pos-gatech-y: -6px;       /* Georgia Tech vertical offset */
+    --logo-pos-trends-x: 2px;       /* TReNDS center horizontal offset */
+    --logo-pos-trends-y: -5px;       /* TReNDS center vertical offset */
+  }
+
+  /* --- Experience Section Container --- */
+  .experience-list {
+    margin: 2rem 0;
+  }
+
+  /* --- Individual Experience Item (Column-based Layout) --- */
+  .experience-item {
+    display: grid;
+    grid-template-columns: var(--logo-container-width) var(--time-column-width) 1fr;
+    align-items: start;
+    gap: 1rem;
+    padding: var(--entry-padding) 0;
+    border-bottom: 1px solid rgba(0, 0, 0, var(--entry-border-opacity));
+    transition: background-color 0.2s ease;
+  }
+
+  .experience-item:last-child {
+    border-bottom: none;
+  }
+
+  .experience-item:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  /* --- Logo Column --- */
+  .experience-logo {
+    flex-shrink: 0;
+    width: var(--logo-container-width);
+    height: var(--logo-container-height);
     display: flex;
-    justify-content: center; /* Center the items horizontally */
-    align-items: center;    /* Align items vertically */
-    flex-wrap: wrap;        /* Allow items to wrap to the next line */
-    gap: 20px;              /* Adds space between items */
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 0;
   }
 
-  .affiliation-item {
-    flex: 1 1 150px; /* Items will grow/shrink but won't get smaller than 150px before wrapping */
-    max-width: 180px; /* Prevents items from getting too wide on large screens */
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  .experience-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+    transform: scale(var(--logo-image-zoom));
+    filter: grayscale(15%) opacity(0.9);
+    transition: filter 0.3s ease, transform 0.3s ease;
   }
 
-  .affiliation-item:hover {
-    transform: scale(1.05) translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  .experience-item:hover .experience-logo img {
+    filter: grayscale(0%) opacity(1);
+  }
+
+  /* --- Individual Logo Scaling --- */
+  .experience-logo img[alt*="DeepMind"] {
+    transform: scale(calc(var(--logo-image-zoom) * var(--logo-scale-deepmind)));
+  }
+
+  .experience-logo img[alt*="Cohere"] {
+    transform: scale(calc(var(--logo-image-zoom) * var(--logo-scale-cohere)));
+  }
+
+  .experience-logo img[alt*="Dolby"] {
+    transform: scale(calc(var(--logo-image-zoom) * var(--logo-scale-dolby)));
+  }
+
+  .experience-logo img[alt*="Meta"] {
+    transform: scale(calc(var(--logo-image-zoom) * var(--logo-scale-meta)));
+  }
+
+  .experience-logo img[alt*="Georgia"] {
+    transform: scale(calc(var(--logo-image-zoom) * var(--logo-scale-gatech)));
+  }
+
+  .experience-logo img[alt*="TReNDS"] {
+    transform: scale(calc(var(--logo-image-zoom) * var(--logo-scale-trends)));
+  }
+
+  /* --- Individual Logo Container Positioning --- */
+  .experience-logo:has(img[alt*="DeepMind"]) {
+    transform: translate(var(--logo-pos-deepmind-x), var(--logo-pos-deepmind-y));
+  }
+
+  .experience-logo:has(img[alt*="Cohere"]) {
+    transform: translate(var(--logo-pos-cohere-x), var(--logo-pos-cohere-y));
+  }
+
+  .experience-logo:has(img[alt*="Dolby"]) {
+    transform: translate(var(--logo-pos-dolby-x), var(--logo-pos-dolby-y));
+  }
+
+  .experience-logo:has(img[alt*="Meta"]) {
+    transform: translate(var(--logo-pos-meta-x), var(--logo-pos-meta-y));
+  }
+
+  .experience-logo:has(img[alt*="Georgia"]) {
+    transform: translate(var(--logo-pos-gatech-x), var(--logo-pos-gatech-y));
+  }
+
+  .experience-logo:has(img[alt*="TReNDS"]) {
+    transform: translate(var(--logo-pos-trends-x), var(--logo-pos-trends-y));
+  }
+
+  /* --- Role & Time Column --- */
+  .experience-role-time {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .experience-role {
+    font-size: 0.875rem;
+    font-weight: var(--global-bold-font-weight, 500);
+    color: var(--global-bold-text-color, #555);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .experience-time {
+    font-size: 0.8rem;
+    color: var(--global-text-color, #666);
+    opacity: 0.75;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* --- Summary Column --- */
+  .experience-summary-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .experience-summary {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    color: var(--global-text-color, #555);
+    margin: 0;
+    opacity: 0.85;
+    text-align: left;
+  }
+
+  .experience-summary-small {
+    font-size: 0.8rem;
+    opacity: 0.75;
+  }
+
+  /* --- Experience Content (wrapper for company and time) --- */
+  .experience-content {
+    display: contents; /* Makes children participate in parent grid */
+  }
+
+  .experience-header-row {
+    display: contents; /* Makes children participate in parent grid */
+  }
+
+  /* --- Link Styling --- */
+  .experience-link {
+    color: inherit;
+    text-decoration: none;
+    display: contents; /* Makes link children participate in parent grid */
+  }
+
+  .experience-link:hover {
+    text-decoration: none;
+  }
+
+  /* --- Section Header --- */
+  .experience-section-header {
+    margin: 2rem 0 var(--section-header-spacing) 0;
+  }
+
+  .experience-section-header h5 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--global-text-color, #333);
   }
 
   /* --- Mobile Responsive Styles --- */
-  /* This block only applies to screens 768px wide or smaller */
   @media (max-width: 768px) {
-    .affiliations-grid {
-      flex-direction: column; /* Stack the items vertically */
-      align-items: center;    /* Center the stacked items */
+    .experience-item {
+      grid-template-columns: var(--logo-container-width) 1fr;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
     }
 
-    .affiliation-item {
-      flex-basis: 80%;      /* Each item takes up 80% of the available width */
-      max-width: 250px;     /* Ensure they don't get too wide on tablets */
+    .experience-logo {
+      grid-row: 1;
+      grid-column: 1;
+    }
+
+    .experience-role-time {
+      grid-row: 1;
+      grid-column: 2;
+    }
+
+    .experience-role {
+      font-size: 0.85rem;
+    }
+
+    .experience-time {
+      font-size: 0.75rem;
+    }
+
+    .experience-summary {
+      font-size: 0.85rem;
+      grid-row: 2;
+      grid-column: 1 / -1;
+      margin-top: 0.25rem;
     }
   }
 
-
-  .logo-container {
-    height: 50px; /* This is the key: creates a standard height box for all logos */
-    display: flex;
-    align-items: center; /* This vertically centers the <img> inside the box */
-    justify-content: center; /* This horizontally centers the <img> */
-    margin-bottom: 15px; /* Adds some space between the logo and the text below */
+  @media (max-width: 480px) {
+    .experience-item {
+      gap: 0.5rem;
+    }
   }
-
 </style>
 
 <div class="post">
@@ -90,88 +294,125 @@ layout: default
 
     <div class="clearfix">{{ content }}</div>
 
-    <!-- Image Grid (ADDED by ME) -->
-
-    <!-- ADD THIS LINE for the title -->
-    <hr class="section-line" style="margin-bottom: 1rem; opacity: 0.7;">
-    <h5 style="margin-top: 0rem; font-weight: 400;">Research and Work Experience</h5>
-    <hr class="section-line" style="margin-top: 1rem; opacity: 0.45;">
+    <!-- Experience Section -->
+    <div class="experience-section-header">
+      <h5>Research and Work Experience</h5>
+    </div>
     
-    <!-- SCALING CONTAINER -->
-    <div class="affiliations-scale-container">
-      <!-- This is the main grid container -->
-      <div class="affiliations-grid">
+    <div class="experience-list">
+      <!-- Google DeepMind -->
+      <div class="experience-item">
+        <a href="https://deepmind.google/" target="_blank" rel="noopener noreferrer" class="experience-link">
+          <div class="experience-logo">
+            <img src="{{ 'assets/img/deepmind.svg' | trends }}" alt="Google DeepMind">
+          </div>
+          <div class="experience-role-time">
+            <p class="experience-role">Research Intern</p>
+            <p class="experience-time">Spring 2026</p>
+            <p class="experience-time">Fall 2025</p>
+          </div>
+          <p class="experience-summary">Diffusion model representation engineering and alignment. Focus on analysis, controllability, interpretability & safety.</p>
+        </a>
+      </div>
 
-        <!-- Google DeepMind Item -->
-        <div class="affiliation-item">
-          <a href="https://deepmind.google/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-            <div class="logo-container">
-              <!-- Added translateY(5px) to move the logo down -->
-              <img src="{{ 'assets/img/deepmind.svg' | trends }}" alt="Google DeepMind" style="transform: scale(0.90) translateY(5px); max-height: 100%; max-width: 100%;">
-            </div>
-            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
-              <p>Google DeepMind</p>
-              <p>Fall 2025</p>
-            </div>
-          </a>
-        </div>
+      <!-- Cohere -->
+      <div class="experience-item">
+        <a href="https://cohere.com/" target="_blank" rel="noopener noreferrer" class="experience-link">
+          <div class="experience-logo">
+            <img src="{{ 'assets/img/cohere.png' | cohere }}" alt="Cohere">
+          </div>
+          <div class="experience-role-time">
+            <p class="experience-role">Research Intern</p>
+            <p class="experience-time">Fall 2024</p>
+          </div>
+          <p class="experience-summary">Inference-time activation sparsity techniques for large language models (LLMs).</p>
+        </a>
+      </div>
 
-        <!-- Cohere Item -->
-        <div class="affiliation-item">
-          <a href="https://cohere.com/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-            <div class="logo-container">
-              <!-- Added translateY(5px) to move the logo down -->
-              <img src="{{ 'assets/img/cohere.png' | cohere }}" alt="Cohere" style="transform: scale(1.05) translateY(5px); max-height: 100%; max-width: 100%;">
-            </div>
-            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
-              <p>Cohere</p>
-              <p>Fall 2024</p>
-            </div>
-          </a>
-        </div>
+      <!-- Dolby Labs -->
+      <div class="experience-item">
+        <a href="https://www.dolby.com/" target="_blank" rel="noopener noreferrer" class="experience-link">
+          <div class="experience-logo">
+            <img src="{{ 'assets/img/dolby.png' | dolby }}" alt="Dolby Labs">
+          </div>
+          <div class="experience-role-time">
+            <p class="experience-role">Research Intern</p>
+            <p class="experience-time">Summer 2024</p>
+          </div>
+          <p class="experience-summary">Efficient fine-tuning method for LLMs using probabilistic layer selection.</p>
+        </a>
+      </div>
 
-        <!-- Dolby Labs Item -->
-        <div class="affiliation-item">
-          <a href="https://www.dolby.com/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-            <div class="logo-container">
-              <!-- Added translateY(5px) to move the logo down -->
-              <img src="{{ 'assets/img/dolby.png' | dolby }}" alt="Dolby Labs" style="transform: scale(0.98) translateY(8px); max-height: 100%; max-width: 100%;">
-            </div>
-            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
-              <p>Dolby Labs</p>
-              <p>Summer 2024</p>
-            </div>
-          </a>
-        </div>
+      <!-- Meta AI -->
+      <div class="experience-item">
+        <a href="https://ai.meta.com/research/fair/" target="_blank" rel="noopener noreferrer" class="experience-link">
+          <div class="experience-logo">
+            <img src="{{ 'assets/img/meta_ai.png' | meta_ai }}" alt="FAIR at Meta AI">
+          </div>
+          <div class="experience-role-time">
+            <p class="experience-role">Research Intern</p>
+            <p class="experience-time">Summer 2022</p>
+          </div>
+          <p class="experience-summary">Research on signal processing based techniques for sparse Deep Learning. Contributed to <a href="https://github.com/facebookresearch/fairscale">facebookresearch/fairscale</a> repo.</p>
+        </a>
+      </div>
 
-        <!-- Meta AI Item -->
-        <div class="affiliation-item">
-          <a href="https://ai.meta.com/research/fair/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-            <div class="logo-container">
-              <!-- Added translateY(5px) to move the logo down -->
-              <img src="{{ 'assets/img/meta_ai.png' | meta_ai }}" alt="FAIR at Meta AI" style="transform: scale(0.9) translateY(4px); max-height: 100%; max-width: 100%;">
-            </div>
-            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
-              <p>FAIR at Meta AI</p>
-              <p>Summer 2022</p>
-            </div>
-          </a>
-        </div>
+      <!-- TReNDS Center -->
+      <div class="experience-item">
+        <a href="https://trendscenter.org/" target="_blank" rel="noopener noreferrer" class="experience-link">
+          <div class="experience-logo">
+            <img src="{{ 'assets/img/trends.png' | trends }}" alt="TReNDS Center">
+          </div>
+          <div class="experience-role-time">
+            <p class="experience-role">GRA</p>
+            <p class="experience-time">Fall 2019 - Present</p>
+          </div>
+          <p class="experience-summary">Graduate research assistant (GRA) with Dr. Vince Calhoun and Dr. Sergey Plis.</p>
+        </a>
+      </div>
 
-        <!-- Georgia Tech Item -->
-        <div class="affiliation-item">
-          <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">
-            <div class="logo-container">
-              <!-- Added translateY(5px) to move the logo down -->
-              <img src="{{ 'assets/img/gt.png' | gatech }}" alt="Georgia Tech" style="transform: scale(1.05) translateY(5px); max-height: 100%; max-width: 100%;">
-            </div>
-            <div class="image-description" style="text-align: center; line-height: 0.3; font-size: 14px;">
-              <p>Georgia Tech</p>
-              <p>Aug 2019 - Present</p>
-            </div>
-          </a>
-        </div>
+    </div>
 
+    <!-- Education Section -->
+    <div class="experience-section-header">
+      <h5>Education</h5>
+    </div>
+    
+    <div class="experience-list">
+      <!-- Georgia Tech PhD -->
+      <div class="experience-item">
+        <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="experience-link">
+          <div class="experience-logo">
+            <img src="{{ 'assets/img/gt.png' | gatech }}" alt="Georgia Tech">
+          </div>
+          <div class="experience-role-time">
+            <p class="experience-role">PhD Student</p>
+            <p class="experience-time">Aug 2019 - Present</p>
+          </div>
+          <div class="experience-summary-container">
+            <p class="experience-summary">Research in learning algorithms and sparse learning across domains.</p>
+            <p class="experience-summary">Dissertation: Principled Sparsity for Efficient Deep Learning Across Computational Paradigms.</p>
+            <p class="experience-summary experience-summary-small">CGPA 4.0/4.0</p>
+          </div>
+        </a>
+      </div>
+
+
+      <!-- Georgia Tech Master's -->
+      <div class="experience-item">
+        <a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer" class="experience-link">
+          <div class="experience-logo">
+            <img src="{{ 'assets/img/gt.png' | gatech }}" alt="Georgia Tech">
+          </div>
+          <div class="experience-role-time">
+            <p class="experience-role">Master's</p>
+            <p class="experience-time">Aug 2019 - May 2021</p>
+          </div>
+          <div class="experience-summary-container">
+            <p class="experience-summary">Research and thesis on Explicit Group Sparse Projection. <a href="https://repository.gatech.edu/entities/publication/84534827-bf15-4cdb-a753-ff621cc60d00">Master's Thesis</a>.</p>
+            <p class="experience-summary experience-summary-small">CGPA 4.0/4.0</p>
+          </div>
+        </a>
       </div>
     </div>
 

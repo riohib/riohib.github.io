@@ -7,6 +7,8 @@
   --global-code-bg-color: #{$code-bg-color-light};
   --global-text-color: #{$black-color};
   --global-text-color-light: #{$grey-color};
+  --global-bold-text-color: #555555;  /* Color for bold text (lighter gray) */
+  --global-bold-font-weight: 500;     /* Font weight for bold text (less bold) */
   // --global-theme-color: #{$purple-color};
   // --global-hover-color: #{$purple-color};
   // --global-theme-color: #4a76d3; // <--- CHANGED
