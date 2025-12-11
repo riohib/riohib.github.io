@@ -14,6 +14,9 @@ layout: default
     --section-header-spacing: 1.0rem; /* Space below section headers (reduce to bring content closer) */
     --entry-border-opacity: 0.05;    /* Opacity of border between entries (0.0 = invisible, 1.0 = solid) */
     --entry-padding: 0.4rem;         /* Vertical padding between each entry (increase for more space) */
+    --profile-image-scale: 0.8;      /* Scale factor for profile photo (1.0 = default, 0.8 = 20% smaller) */
+    --about-to-experience-gap: -3.5rem; /* Gap between about section and experience section */
+    --experience-to-education-gap: 1.5rem; /* Gap between experience section and education section */
     
     /* Individual logo scale adjustments (multiplied with global zoom) */
     --logo-scale-deepmind: 1.3;     /* Google DeepMind logo scale */
@@ -204,7 +207,12 @@ layout: default
 
   /* --- Section Header --- */
   .experience-section-header {
-    margin: 2rem 0 var(--section-header-spacing) 0;
+    margin: var(--about-to-experience-gap) 0 var(--section-header-spacing) 0;
+  }
+
+  /* Education section header - separate gap control */
+  .experience-section-header.education-header {
+    margin-top: var(--experience-to-education-gap);
   }
 
   .experience-section-header h5 {
@@ -269,6 +277,23 @@ layout: default
     .experience-item {
       gap: 0.5rem;
     }
+  }
+
+  /* --- Profile Photo Scaling & Alignment --- */
+  .profile {
+    vertical-align: top;
+    margin-top: 0;
+  }
+
+  .profile img {
+    transform: scale(var(--profile-image-scale));
+    transform-origin: top center;
+    display: block;
+  }
+
+  /* --- Reduce gap between about section and experience section --- */
+  .clearfix {
+    margin-bottom: 0.5rem;
   }
 </style>
 
@@ -391,7 +416,7 @@ layout: default
     </div>
 
     <!-- Education Section -->
-    <div class="experience-section-header">
+    <div class="experience-section-header education-header">
       <h5>Education</h5>
     </div>
     
