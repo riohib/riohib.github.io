@@ -15,27 +15,27 @@ layout: default
     --entry-border-opacity: 0.05;    /* Opacity of border between entries (0.0 = invisible, 1.0 = solid) */
     --entry-padding: 0.4rem;         /* Vertical padding between each entry (increase for more space) */
     --profile-image-scale: 0.8;      /* Scale factor for profile photo (1.0 = default, 0.8 = 20% smaller) */
-    --about-to-experience-gap: -3.5rem; /* Gap between about section and experience section */
+    --about-to-experience-gap: -1.0rem; /* Gap between about section and experience section */
     --experience-to-education-gap: 1.5rem; /* Gap between experience section and education section */
     
     /* Individual logo scale adjustments (multiplied with global zoom) */
-    --logo-scale-deepmind: 1.3;     /* Google DeepMind logo scale */
-    --logo-scale-cohere: 1.1;       /* Cohere logo scale */
-    --logo-scale-dolby: 0.90;        /* Dolby Labs logo scale */
-    --logo-scale-meta: 1.3;         /* Meta AI logo scale */
-    --logo-scale-gatech: 1.0;       /* Georgia Tech logo scale */
-    --logo-scale-trends: 1.3;       /* TReNDS center logo scale */
+    --logo-scale-deepmind: 1.5;     /* Google DeepMind logo scale */
+    --logo-scale-cohere: 1.2;       /* Cohere logo scale */
+    --logo-scale-dolby: 0.95;        /* Dolby Labs logo scale */
+    --logo-scale-meta: 1.4;         /* Meta AI logo scale */
+    --logo-scale-gatech: 1.6;       /* Georgia Tech logo scale */
+    --logo-scale-trends: 1.4;       /* TReNDS center logo scale */
     
     /* Individual logo position adjustments (negative=left/up, positive=right/down) */
-    --logo-pos-deepmind-x: 1px;     /* DeepMind horizontal offset */
+    --logo-pos-deepmind-x: 3px;     /* DeepMind horizontal offset */
     --logo-pos-deepmind-y: -5px;     /* DeepMind vertical offset */
     --logo-pos-cohere-x: -3px;       /* Cohere horizontal offset */
     --logo-pos-cohere-y: -3px;       /* Cohere vertical offset */
-    --logo-pos-dolby-x: -10px;        /* Dolby horizontal offset */
+    --logo-pos-dolby-x: -8px;        /* Dolby horizontal offset */
     --logo-pos-dolby-y: 0px;        /* Dolby vertical offset */
     --logo-pos-meta-x: -2px;         /* Meta AI horizontal offset */
     --logo-pos-meta-y: -4px;         /* Meta AI vertical offset */
-    --logo-pos-gatech-x: 0px;       /* Georgia Tech horizontal offset */
+    --logo-pos-gatech-x: 6px;       /* Georgia Tech horizontal offset */
     --logo-pos-gatech-y: -6px;       /* Georgia Tech vertical offset */
     --logo-pos-trends-x: 2px;       /* TReNDS center horizontal offset */
     --logo-pos-trends-y: -5px;       /* TReNDS center vertical offset */
@@ -54,15 +54,10 @@ layout: default
     gap: 1rem;
     padding: var(--entry-padding) 0;
     border-bottom: 1px solid rgba(0, 0, 0, var(--entry-border-opacity));
-    transition: background-color 0.2s ease;
   }
 
   .experience-item:last-child {
     border-bottom: none;
-  }
-
-  .experience-item:hover {
-    background-color: rgba(0, 0, 0, 0.02);
   }
 
   /* --- Logo Column --- */
@@ -73,8 +68,21 @@ layout: default
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    overflow: hidden;
-    padding: 0;
+    overflow: visible; /* Allow shadow to show */
+    padding: 0.5rem;
+    border-radius: 8px;
+    background-color: transparent;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.4s ease,
+                background-color 0.4s ease;
+    cursor: pointer;
+  }
+
+  .experience-logo:hover {
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12),
+                0 4px 8px rgba(0, 0, 0, 0.08);
+    background-color: rgba(255, 255, 255, 0.6);
   }
 
   .experience-logo img {
@@ -84,10 +92,11 @@ layout: default
     object-position: left center;
     transform: scale(var(--logo-image-zoom));
     filter: grayscale(15%) opacity(0.9);
-    transition: filter 0.3s ease, transform 0.3s ease;
+    transition: filter 0.4s ease;
+    border-radius: 6px;
   }
 
-  .experience-item:hover .experience-logo img {
+  .experience-logo:hover img {
     filter: grayscale(0%) opacity(1);
   }
 
@@ -194,11 +203,11 @@ layout: default
     display: contents; /* Makes children participate in parent grid */
   }
 
-  /* --- Link Styling --- */
+  /* --- Link Styling (only wraps logo now) --- */
   .experience-link {
     color: inherit;
     text-decoration: none;
-    display: contents; /* Makes link children participate in parent grid */
+    display: block;
   }
 
   .experience-link:hover {
@@ -230,9 +239,10 @@ layout: default
       padding: 0.5rem 0;
     }
 
-    .experience-logo {
+    .experience-link {
       grid-row: 1;
       grid-column: 1;
+      display: block;
     }
 
     .experience-role-time {
@@ -255,7 +265,7 @@ layout: default
     }
 
     /* Direct summary elements (experience section) - target summaries that are grid items */
-    .experience-item .experience-summary {
+    .experience-item > .experience-summary {
       grid-row: 2;
       grid-column: 1 / -1;
       margin-top: 0.25rem;
@@ -285,6 +295,14 @@ layout: default
     margin-top: 0;
   }
 
+  .profile.float-right {
+    margin-left: 0.15rem; /* Minimal margin to move text column boundary left */
+  }
+
+  .profile.float-left {
+    margin-right: 0.15rem; /* Minimal margin to move text column boundary left */
+  }
+
   .profile img {
     transform: scale(var(--profile-image-scale));
     transform-origin: top center;
@@ -294,6 +312,11 @@ layout: default
   /* --- Reduce gap between about section and experience section --- */
   .clearfix {
     margin-bottom: 0.5rem;
+  }
+
+  /* Constrain text column width when profile photo is present */
+  article .clearfix {
+    max-width: 65%; /* Makes text column narrower when photo is floated */
   }
 </style>
 
@@ -348,13 +371,13 @@ layout: default
           <div class="experience-logo">
             <img src="{{ 'assets/img/deepmind.svg' | trends }}" alt="Google DeepMind">
           </div>
-          <div class="experience-role-time">
-            <p class="experience-role">Research Intern</p>
-            <p class="experience-time">Spring 2026</p>
-            <p class="experience-time">Fall 2025</p>
-          </div>
-          <p class="experience-summary">Diffusion model representation engineering and alignment. Focus on analysis, controllability, interpretability & safety.</p>
         </a>
+        <div class="experience-role-time">
+          <p class="experience-role">Research Intern</p>
+          <p class="experience-time">Spring 2026</p>
+          <p class="experience-time">Fall 2025</p>
+        </div>
+        <p class="experience-summary">Diffusion model representation engineering and alignment. Focus on analysis, controllability, interpretability & safety.</p>
       </div>
 
       <!-- Cohere -->
@@ -363,12 +386,12 @@ layout: default
           <div class="experience-logo">
             <img src="{{ 'assets/img/cohere.png' | cohere }}" alt="Cohere">
           </div>
-          <div class="experience-role-time">
-            <p class="experience-role">Research Intern</p>
-            <p class="experience-time">Fall 2024</p>
-          </div>
-          <p class="experience-summary">Inference-time activation sparsity techniques for large language models (LLMs).</p>
         </a>
+        <div class="experience-role-time">
+          <p class="experience-role">Research Intern</p>
+          <p class="experience-time">Fall 2024</p>
+        </div>
+        <p class="experience-summary">Inference-time activation sparsity techniques for large language models (LLMs).</p>
       </div>
 
       <!-- Dolby Labs -->
@@ -377,12 +400,12 @@ layout: default
           <div class="experience-logo">
             <img src="{{ 'assets/img/dolby.png' | dolby }}" alt="Dolby Labs">
           </div>
-          <div class="experience-role-time">
-            <p class="experience-role">Research Intern</p>
-            <p class="experience-time">Summer 2024</p>
-          </div>
-          <p class="experience-summary">Efficient fine-tuning method for LLMs using probabilistic layer selection.</p>
         </a>
+        <div class="experience-role-time">
+          <p class="experience-role">Research Intern</p>
+          <p class="experience-time">Summer 2024</p>
+        </div>
+        <p class="experience-summary">Efficient fine-tuning method for LLMs using probabilistic layer selection.</p>
       </div>
 
       <!-- Meta AI -->
@@ -391,12 +414,12 @@ layout: default
           <div class="experience-logo">
             <img src="{{ 'assets/img/meta_ai.png' | meta_ai }}" alt="FAIR at Meta AI">
           </div>
-          <div class="experience-role-time">
-            <p class="experience-role">Research Intern</p>
-            <p class="experience-time">Summer 2022</p>
-          </div>
-          <p class="experience-summary">Research on signal processing based techniques for sparse Deep Learning. Contributed to <a href="https://github.com/facebookresearch/fairscale">facebookresearch/fairscale</a> repo.</p>
         </a>
+        <div class="experience-role-time">
+          <p class="experience-role">Research Intern</p>
+          <p class="experience-time">Summer 2022</p>
+        </div>
+        <p class="experience-summary">Research on signal processing based techniques for sparse Deep Learning. My neural network sparsity library was integrated with the <a href="https://github.com/facebookresearch/fairscale">facebookresearch/fairscale</a> repo.</p>
       </div>
 
       <!-- TReNDS Center -->
@@ -405,12 +428,12 @@ layout: default
           <div class="experience-logo">
             <img src="{{ 'assets/img/trends.png' | trends }}" alt="TReNDS Center">
           </div>
-          <div class="experience-role-time">
-            <p class="experience-role">GRA</p>
-            <p class="experience-time">Fall 2019 - Present</p>
-          </div>
-          <p class="experience-summary">Graduate research assistant (GRA) with Dr. Vince Calhoun and Dr. Sergey Plis.</p>
         </a>
+        <div class="experience-role-time">
+          <p class="experience-role">GRA</p>
+          <p class="experience-time">Fall 2019 - Present</p>
+        </div>
+        <p class="experience-summary">Graduate research assistant (GRA) with Dr. Vince Calhoun and Dr. Sergey Plis.</p>
       </div>
 
     </div>
@@ -427,16 +450,16 @@ layout: default
           <div class="experience-logo">
             <img src="{{ 'assets/img/gt.png' | gatech }}" alt="Georgia Tech">
           </div>
-          <div class="experience-role-time">
-            <p class="experience-role">PhD Student</p>
-            <p class="experience-time">Aug 2019 - Present</p>
-          </div>
-          <div class="experience-summary-container">
-            <p class="experience-summary">Research in learning algorithms and sparse learning across domains.</p>
-            <p class="experience-summary">Dissertation: Principled Sparsity for Efficient Deep Learning Across Computational Paradigms.</p>
-            <p class="experience-summary experience-summary-small">CGPA 4.0/4.0</p>
-          </div>
         </a>
+        <div class="experience-role-time">
+          <p class="experience-role">PhD Student</p>
+          <p class="experience-time">Aug 2021 - Present</p>
+        </div>
+        <div class="experience-summary-container">
+          <p class="experience-summary">Research in learning algorithms and sparse learning across domains.</p>
+          <p class="experience-summary">Dissertation: Principled Sparsity for Efficient Deep Learning Across Computational Paradigms.</p>
+          <p class="experience-summary experience-summary-small">CGPA 4.0/4.0</p>
+        </div>
       </div>
 
 
@@ -446,15 +469,15 @@ layout: default
           <div class="experience-logo">
             <img src="{{ 'assets/img/gt.png' | gatech }}" alt="Georgia Tech">
           </div>
-          <div class="experience-role-time">
-            <p class="experience-role">Master's</p>
-            <p class="experience-time">Aug 2019 - May 2021</p>
-          </div>
-          <div class="experience-summary-container">
-            <p class="experience-summary">Research and thesis on Explicit Group Sparse Projection. <a href="https://repository.gatech.edu/entities/publication/84534827-bf15-4cdb-a753-ff621cc60d00">Master's Thesis</a>.</p>
-            <p class="experience-summary experience-summary-small">CGPA 4.0/4.0</p>
-          </div>
         </a>
+        <div class="experience-role-time">
+          <p class="experience-role">Master's</p>
+          <p class="experience-time">Aug 2019 - May 2021</p>
+        </div>
+        <div class="experience-summary-container">
+          <p class="experience-summary">Research and thesis on Explicit Group Sparse Projection. <a href="https://repository.gatech.edu/entities/publication/84534827-bf15-4cdb-a753-ff621cc60d00">Master's Thesis</a>.</p>
+          <p class="experience-summary experience-summary-small">CGPA 4.0/4.0</p>
+        </div>
       </div>
     </div>
 
