@@ -5,10 +5,24 @@
 @string{aps = {American Physical Society,}}
 
 
-@article{arnob2024efficient,
+@article{rohib2026ssfl,
+  abbr={TMLR},
+  title={SSFL: Discovering Sparse Unified Subnetworks at Initialization for Efficient Federated Learning},
+  author={Riyasat Ohib and Bishal Thapaliya and Gintare Karolina Dziugaite and Jingyu Liu and Vince D. Calhoun and Sergey Plis},
+  abstract={In this work, we propose Salient Sparse Federated Learning (SSFL), a streamlined approach for sparse federated learning with efficient communication. SSFL identifies a sparse subnetwork prior to training, leveraging parameter saliency scores computed separately on local client data in non-IID scenarios, and then aggregated, to determine a global mask. Only the sparse model weights are trained and communicated each round between the clients and the server. On standard benchmarks including CIFAR-10, CIFAR-100, and Tiny-ImageNet, SSFL consistently improves the accuracy–sparsity trade-off, achieving more than 20\% relative error reduction on CIFAR-10 compared to the strongest sparse baseline, while reducing communication costs by 
+ relative to dense FL. Finally, in a real-world federated learning deployment, SSFL delivers over 
+ faster communication time, underscoring its practical efficiency.
+    },
+  journal={TMLR},
+  year={2026},
+  selected={true},
+  html={https://openreview.net/forum?id=kUZ6LhUB26},
+}
+
+@article{arnob2024sparseadapters,
   abbr={COLM},
   title={Exploring Sparse Adapters for Scalable Merging of Parameter Efficient Experts},
-  author={Samin Yeasar Arnob and Riyasat Ohib and Sergey M. Plis and Amy Zhang and Alessandro Sordoni and Doina Precup},
+  author = {Samin Yeasar Arnob and Zhan Su and Minseon Kim and Oleksiy Ostapenko and Doina Precup and Lucas Caccia and Alessandro Sordoni},
   abstract={Model merging aims to integrate knowledge from multiple finetuned experts into a single, unified multi-task model. 
     To Merging parameter-efficient task experts has recently gained growing attention as a way to build modular architectures that 
     can be rapidly adapted on the fly for specific downstream tasks, without requiring additional fine-tuning. 
@@ -48,23 +62,6 @@
   html={https://openreview.net/forum?id=WEoOreP0n5},
 }
 
-
-@article{ohib2024unmasking,
-  abbr={arxiv},
-  title={Unmasking Efficiency: Learning Salient Sparse Models in Non-IID Federated Learning},
-  author={Riyasat Ohib and Bishal Thapaliya and Gintare Karolina Dziugaite and Jingyu Liu and Vince Calhoun and Sergey Plis},
-  abstract={In this work, we propose Salient Sparse Federated Learning (SSFL), a streamlined approach for sparse federated learning 
-    with efficient communication. SSFL identifies a sparse subnetwork prior to training, leveraging parameter saliency scores computed
-    separately on local client data in non-IID scenarios, and then aggregated, to determine a global mask. Only the sparse model weights
-    are communicated each round between the clients and the server. We validate SSFL's effectiveness using standard non-IID benchmarks,
-    noting marked improvements in the sparsity--accuracy trade-offs. Finally, we deploy our method in a real-world federated learning 
-    framework and report improvement in communication time.
-    },
-  journal={arxiv},
-  year={2024},
-  selected={true},
-  html={https://arxiv.org/abs/2405.09037},
-}
 
 @article{ohib2024unmasking,
   abbr={arxiv},
@@ -261,4 +258,3 @@
   year={2016},
   html={https://sigport.org/documents/enf-based-grid-classification-system-identifying-region-origin-digital-recordings-team}
 }
-

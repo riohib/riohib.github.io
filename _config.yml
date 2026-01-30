@@ -113,6 +113,11 @@ zotero_username: # your zotero username
 contact_note: >
   Email is the best way to reach me.
 
+# Google Appointment Schedules (paste your booking page link below)
+# Example format: https://calendar.google.com/calendar/u/0/appointments/schedules/XXXXXXXXXXXX
+appointments:
+  booking_url: "https://calendar.app.google/ykAXkPnEMcsk5sTe9"
+
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
 # -----------------------------------------------------------------------------
@@ -390,7 +395,7 @@ external_links:
 # MAKE SURE imagemagick is installed and on your PATH before enabling imagemagick. In a terminal, run:
 #   convert -version
 imagemagick:
-  enabled: true # enables responsive images for your site (recommended, see https://github.com/alshedivat/al-folio/issues/537)
+  enabled: false # disables responsive WebP srcset (safer for GitHub Pages "deploy from branch")
   widths:
     - 480
     - 800
