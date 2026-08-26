@@ -113,11 +113,6 @@ zotero_username: # your zotero username
 contact_note: >
   Email is the best way to reach me.
 
-# Google Appointment Schedules (paste your booking page link below)
-# Example format: https://calendar.google.com/calendar/u/0/appointments/schedules/XXXXXXXXXXXX
-appointments:
-  booking_url: "https://calendar.app.google/ykAXkPnEMcsk5sTe9"
-
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
 # -----------------------------------------------------------------------------
